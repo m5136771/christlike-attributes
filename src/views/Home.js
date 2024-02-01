@@ -1,55 +1,25 @@
-import React from 'react';
-
-/* import Auth from '../components/Auth';
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { auth } from '../firebase';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth'; */
-
-import BaseButton from '../components/buttons/BaseButton';
+import Auth from '../components/Auth';
 
 function Home() {
+	const navigate = useNavigate();
 
-	// Firebase Authentication
-	/* const handleRegister = (email, password) => {
-		createUserWithEmailAndPassword(auth, email, password)
-		  .then((userCredential) => {
-			// Signed in 
-			const user = userCredential.user;
-			console.log(user);
-			// ...
-		  })
-		  .catch((error) => {
-			const errorMessage = error.message;
-			console.log(errorMessage);
-			// ..
-		  });
-	  }
-	
-	  const handleLogin = (email, password) => {
-		signInWithEmailAndPassword(auth, email, password)
-		  .then((userCredential) => {
-			// Signed in 
-			const user = userCredential.user;
-			console.log(user);
-			// ...
-		  })
-		  .catch((error) => {
-			const errorMessage = error.message;
-			console.log(errorMessage);
-		  });
-	  } */
+	useEffect(() => {
+		const unsubscribe = auth.onAuthStateChanged((user) => {
+			if (user) {
+				navigate('/dashboard');
+			}
+		});
 
-	const handleButtonClick = () => {
-		console.log('Button clicked');
-	};
+		return () => unsubscribe();
+	}, [navigate]);
 
 	return (
 		<div>
 			<h1>Welcome to Becoming!</h1>
-			<BaseButton 
-                text="Take the Test" 
-                onClick={handleButtonClick} 
-            />
-			{/* <Auth onRegister={handleRegister} onLogin={handleLogin} /> */}
+			<Auth />
 		</div>
 	);
 }
