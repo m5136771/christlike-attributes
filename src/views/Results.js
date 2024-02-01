@@ -18,6 +18,10 @@ const data = [
 const ResultsView = () => {
   const [sortType, setSortType] = useState('none');
 
+  const calculateScorePercentage = (item) => {
+    return item.sumOfResponses / (item.totalQuestions * 5);
+  };
+
   const sortedData = [...data].sort((a, b) => {
     if (sortType === 'name-asc') {
       return a.name.localeCompare(b.name);
@@ -26,10 +30,10 @@ const ResultsView = () => {
       return b.name.localeCompare(a.name);
     }
     if (sortType === 'score-asc') {
-      return a.score - b.score;
+      return calculateScorePercentage(a) - calculateScorePercentage(b);
     }
     if (sortType === 'score-desc') {
-      return b.score - a.score;
+      return calculateScorePercentage(b) - calculateScorePercentage(a);
     }
     return 0;
   });
