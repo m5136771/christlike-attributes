@@ -1,22 +1,22 @@
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
-import { Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import Home from './views/Home';
+import Dashboard from './views/Dashboard';
+import Questionnaire from './views/Questionnaire';
+import ResultsView from './views/Results';
 
 
 function App() {
-  
   return (
-    <Router>
-      <div>
-        <section>
-          <Routes>
-            <Route path="/" element={<Home />} />
-          </Routes>
-        </section>
-      </div>
-    </Router>
+    <BrowserRouter future={{ v7_startTransition: true }}>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path='/dashboard' element={<Dashboard />} />
+        <Route path="/questionnaire" element={<Questionnaire />} />
+        <Route path="/results" element={<ResultsView />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

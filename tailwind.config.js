@@ -36,14 +36,28 @@ module.exports = {
       colors: {
         'primary': '#4A90E2',
         'serene-blue': '#4A90E2',
+
         'secondary': '#B18FCF',
         'soft-lavender': '#B18FCF',
+
         'accent': '#F5A623',
         'gentle-gold': '#F5A623',
+
         'neutral': '#F4F4F4',
         'light-gray': '#F4F4F4',
+
         'text': '#333333',
-        'dark-charcoal': '#333333',
+        
+        'crimson-red': '#e53e3e', // Charity
+        'emerald-green': '#4caf50', // Diligence
+        'sunflower-yellow': '#f9d71c', // Faith
+        'sunset-orange': '#f6ad55', // Hope
+        'stone-gray': '#a0aec0', // Humility
+        'ocean-blue': '#2c5282', // Integrity
+        'amethyst-purple': '#805ad5', // Knowledge
+        'dark-charcoal': '#333333', // Obedience
+        'turquoise': '#38b2ac', // Patience
+        'sky-blue': '#3182ce', // Virtue
       },
       fontFamily: {
         'lato': ['Lato', 'sans-serif'],

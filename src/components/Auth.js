@@ -1,20 +1,53 @@
 import React, { useState } from 'react';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../firebase';
+import { useNavigate } from 'react-router-dom';
 
-const Auth = ({ onRegister, onLogin }) => {
+// TODO: Add Phone Sign In
+// TODO: Add Facebook Sign In
+// TODO: Add Google Sign In
+// TODO: Add Apple Sign In (Requires Apple Developer Account)
+
+// TODO Add Password Reset
+
+const Auth = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   const toggleMode = () => {
     setIsLogin(!isLogin);
   };
 
+  const handleRegister = async (email, password) => {
+    try {
+      await createUserWithEmailAndPassword(auth, email, password);
+      navigate('/dashboard');
+    } catch (error) {
+      console.error(error.message);
+      setError(error.message);
+    }
+  };
+
+  const handleLogin = async (email, password) => {
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      navigate('/dashboard');
+    } catch (error) {
+      console.error(error.message);
+      setError(error.message);
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    setError('');
     if (isLogin) {
-      onLogin(email, password);
+      handleLogin(email, password);
     } else {
-      onRegister(email, password);
+      handleRegister(email, password);
     }
   };
 
@@ -22,6 +55,7 @@ const Auth = ({ onRegister, onLogin }) => {
     <div className="flex justify-center items-center h-screen bg-gray-100">
       <div className="p-6 max-w-sm w-full bg-white shadow-md rounded-md">
         <h1 className="text-xl font-bold mb-4">{isLogin ? 'Login' : 'Register'}</h1>
+        {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
             type="email"
