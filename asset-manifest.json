@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/christlike-attributes-app/static/css/main.9a2115c2.css",
-    "main.js": "/christlike-attributes-app/static/js/main.51052a78.js",
-    "static/js/787.45375484.chunk.js": "/christlike-attributes-app/static/js/787.45375484.chunk.js",
-    "index.html": "/christlike-attributes-app/index.html",
-    "main.9a2115c2.css.map": "/christlike-attributes-app/static/css/main.9a2115c2.css.map",
-    "main.51052a78.js.map": "/christlike-attributes-app/static/js/main.51052a78.js.map",
-    "787.45375484.chunk.js.map": "/christlike-attributes-app/static/js/787.45375484.chunk.js.map"
+    "main.css": "/christlike-attributes/static/css/main.9a2115c2.css",
+    "main.js": "/christlike-attributes/static/js/main.96e12c13.js",
+    "static/js/787.5781131a.chunk.js": "/christlike-attributes/static/js/787.5781131a.chunk.js",
+    "index.html": "/christlike-attributes/index.html",
+    "main.9a2115c2.css.map": "/christlike-attributes/static/css/main.9a2115c2.css.map",
+    "main.96e12c13.js.map": "/christlike-attributes/static/js/main.96e12c13.js.map",
+    "787.5781131a.chunk.js.map": "/christlike-attributes/static/js/787.5781131a.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.9a2115c2.css",
-    "static/js/main.51052a78.js"
+    "static/js/main.96e12c13.js"
   ]
 }
