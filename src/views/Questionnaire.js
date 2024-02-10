@@ -33,7 +33,7 @@ const Questionnaire = () => {
     return sectionColors[section] || '#ffffff';
   };
 
-  const progressPercentage = (currentQuestion / questions.length) * 100;
+  /* const progressPercentage = (currentQuestion / questions.length) * 100; */
 
   useEffect(() => {
     /* const fetchData = async () => {
@@ -69,19 +69,19 @@ const Questionnaire = () => {
       fetchData(); */
   }, []);
 
-  const handleNext = () => {
+  /* const handleNext = () => {
     if (currentQuestion < questions.length - 1) {
       setCurrentQuestion(currentQuestion + 1);
     }
     console.log('Current question index:', currentQuestion);
-  }
+  } */
 
-  const handlePrev = () => {
+  /* const handlePrev = () => {
     if (currentQuestion > 0) {
       setCurrentQuestion(currentQuestion - 1);
     }
     console.log('Current question index:', currentQuestion);
-  }
+  } */
 
   const recordResponse = (questionId, answer) => {
     setResponses({ ...responses, [questionId]: answer });
@@ -89,9 +89,9 @@ const Questionnaire = () => {
     console.log('Responses:', responses);
   };
 
-  const calculateScores = () => {
+  /* const calculateScores = () => {
     // Calculate scores based on responses
-  };
+  }; */
 
   const renderQuestion = () => {
     if (currentQuestionIndex < questions.length) {

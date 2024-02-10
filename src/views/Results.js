@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import RadarChartComponent from '../components/charts/RadarChartComponent';
+/* import RadarChartComponent from '../components/charts/RadarChartComponent'; */
 import ProgressRingsComponent from '../components/charts/ProgressRingsComponent';
 
 const data = [
