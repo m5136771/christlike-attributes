@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import QuestionCard from '../components/QuestionCard';
 import ProgressBar from '../components/ProgressBar';
-import { questions } from '../question-bank';
+import questions from '../question-bank';
 /* import axios from 'axios'; */
 
 /* const { DATA_API_KEY } = require('../config.json'); */
