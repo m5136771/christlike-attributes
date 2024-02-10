@@ -2,7 +2,6 @@
   "name": "christlike-attributes",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://m5136771.github.io/christlike-attributes",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.5.1",
     "@fortawesome/free-solid-svg-icons": "^6.5.1",
