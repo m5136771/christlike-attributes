@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import QuestionCard from '../components/QuestionCard';
 import ProgressBar from '../components/ProgressBar';
-import questions from '../question-bank';
+import { questions } from '../question-bank';
 /* import axios from 'axios'; */
 
 /* const { DATA_API_KEY } = require('../config.json'); */
@@ -20,11 +20,12 @@ const sectionColors = {
 };
 
 const Questionnaire = () => {
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   /* const [questions, setQuestions] = useState([]); */
-  const [current, setCurrent] = useState(0);
+  const [currentQuestion, setCurrentQuestion] = useState(0);
   const [responses, setResponses] = useState({});
-  const currentSection = questions[current].section;
-  const remainingInSection = questions.slice(current).filter(q => q.section === currentSection).length;
+  const currentSection = questions[currentQuestion].section;
+  const remainingInSection = questions.slice(currentQuestion).filter(q => q.section === currentSection).length;
   /* const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null); */
 
@@ -32,10 +33,10 @@ const Questionnaire = () => {
     return sectionColors[section] || '#ffffff';
   };
 
-  const progressPercentage = (current / questions.length) * 100;
+  const progressPercentage = (currentQuestion / questions.length) * 100;
 
-  /* useEffect(() => {
-    const fetchData = async () => {
+  useEffect(() => {
+    /* const fetchData = async () => {
       try {
         const data = JSON.stringify({
           "collection": "questions",
@@ -65,26 +66,50 @@ const Questionnaire = () => {
       }
     };
 
-      fetchData();
-    }, []); */
+      fetchData(); */
+  }, []);
 
   const handleNext = () => {
-    if (current < questions.length - 1) {
-      setCurrent(current + 1);
+    if (currentQuestion < questions.length - 1) {
+      setCurrentQuestion(currentQuestion + 1);
     }
-    console.log('Current question index:', current);
+    console.log('Current question index:', currentQuestion);
   }
 
   const handlePrev = () => {
-    if (current > 0) {
-      setCurrent(current - 1);
+    if (currentQuestion > 0) {
+      setCurrentQuestion(currentQuestion - 1);
     }
-    console.log('Current question index:', current);
+    console.log('Current question index:', currentQuestion);
   }
 
   const recordResponse = (questionId, answer) => {
     setResponses({ ...responses, [questionId]: answer });
+    setCurrentQuestionIndex(currentQuestionIndex + 1);
     console.log('Responses:', responses);
+  };
+
+  const calculateScores = () => {
+    // Calculate scores based on responses
+  };
+
+  const renderQuestion = () => {
+    if (currentQuestionIndex < questions.length) {
+      const question = questions[currentQuestionIndex];
+      return (
+        <div className="p-4">
+          <p className="text-lg mb-4">{question.text}</p>
+          <button
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            onClick={() => recordResponse(question.id, /* Sample response */ 5)}
+          >
+            Rate 5 (sample)
+          </button>
+        </div>
+      );
+    } else {
+      return <p className="text-lg">You have completed the questionnaire!</p>;
+    }
   };
 
   /* if (loading) {
@@ -100,18 +125,19 @@ const Questionnaire = () => {
       style={{ backgroundColor: getSectionColor(currentSection) }}
       className="container mx-auto p-4"
     >
+      {renderQuestion()}
       <h2 className="text-3xl font-semibold text-gray-700">{currentSection}</h2>
       <p>{remainingInSection} questions remaining in this section</p>
-      
-      <ProgressBar 
-        questions={questions} 
-        current={current} 
+
+      <ProgressBar
+        questions={questions}
+        current={currentQuestion}
         sectionColors={sectionColors}
       />
 
       {questions.length > 0 && (
         <QuestionCard
-          current={current}
+          current={currentQuestion}
           sectionColors={sectionColors}
         />
       )}
