@@ -22,7 +22,7 @@ const sectionColors = {
 const Questionnaire = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   /* const [questions, setQuestions] = useState([]); */
-  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [currentQuestion] = useState(0);
   const [responses, setResponses] = useState({});
   const currentSection = questions[currentQuestion].section;
   const remainingInSection = questions.slice(currentQuestion).filter(q => q.section === currentSection).length;

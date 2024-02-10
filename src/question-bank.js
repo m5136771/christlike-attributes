@@ -300,3 +300,5 @@ const questions = [
 		"reference": "Doctrine and Covenants 41:5"
 	}
 ];
+
+export default questions;
