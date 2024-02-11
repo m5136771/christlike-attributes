@@ -20,7 +20,7 @@ admin.initializeApp({
    credential: admin.credential.cert(serviceAccount)
 });
 
-// API routes
+// User API routes
 app.post('/api/users', async (req, res) => {
 
    try {
@@ -49,6 +49,20 @@ app.post('/api/users', async (req, res) => {
    }
 });
 
+app.get('/api/users', async (req, res) => {
+   try {
+      const email = req.query.email;
+      const user = await User
+         .findOne({ email: email })
+         .select('-password');
+      console.log(user);
+      res.json(user);
+   } catch (error) {
+      res.status(500).send(error.message);
+   }
+});
+
+// Question API routes
 app.get('/api/questions', async (req, res) => {
    try {
       const q = await Question.find();
