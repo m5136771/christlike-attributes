@@ -7,6 +7,9 @@ const serviceAccount = require('./serviceAccountKey.json');
 const dbconnect = require('./dbconnect');
 const User = require('./models/User');
 const Question = require('./models/Question');
+const Response = require('./models/Response');
+const mongoose = require('mongoose');
+const ObjectId = mongoose.Types.ObjectId;
 
 const app = express();
 app.use(cors({ origin: '*' }));
@@ -69,6 +72,21 @@ app.get('/api/questions', async (req, res) => {
       console.log(q);
       res.json(q);
    } catch (error) {
+      res.status(500).send(error.message);
+   }
+});
+
+
+// Response API routes
+app.post('/api/responses', async (req, res) => {
+   try {
+      const newResponse = new Response(req.body);
+      console.log(newResponse);
+
+      const savedResponse = await newResponse.save();
+      res.status(201).json(savedResponse);
+   } catch (error) {
+      console.error('Error saving response:', error);
       res.status(500).send(error.message);
    }
 });
