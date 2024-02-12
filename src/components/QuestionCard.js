@@ -1,21 +1,43 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { getAuth } from 'firebase/auth';
+import axios from 'axios';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
 const QuestionCard = ({ question, handleResponse, handlePrev, handleNext, current, total }) => {
   const navigate = useNavigate();
+  const auth = getAuth();
+  const user = auth.currentUser;
+  const uid = user.uid;
+  console.log('User:', user, '\n', 'User ID:', uid, '\n', 'Question:', question, '\n', 'Current:', current, '\n', 'Total:', total);
 
   const [response, setResponse] = useState(null);
   const handleOptionChange = (e) => {
     setResponse(e.target.value);
   };
 
-  const handleResponseClick = () => {
+  const handleResponseClick = async () => {
     if (response !== null) {
+      console.log('Next button clicked with response:', response);
       handleResponse(question._id, response);
+
+      // Save response to DB
+      try {
+        await axios.post('http://localhost:5000/api/responses', {
+          user: uid,
+          question: question._id,
+          response: response
+        });
+        console.log('Response saved');
+      } catch (error) {
+        console.error('Error saving response:', error);
+      }
+
       setResponse(null);
     }
+
     if (current < total - 1) {
       handleNext();
     } else {

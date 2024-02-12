@@ -6,6 +6,4 @@ const questionSchema = new mongoose.Schema({
   reference: { type: String, required: true }
 });
 
-const Question = mongoose.model('Question', questionSchema, 'questions');
-
-module.exports = Question;
+module.exports = mongoose.model('Question', questionSchema, 'questions');

@@ -11,13 +11,10 @@ const responseSchema = new mongoose.Schema({
     ref: 'Question',
     required: true
   },
-  answer: {
-    type: Number, // Assuming answers are numerical ratings
+  response: {
+    type: Number,
     required: true
   },
-  // Include timestamp or other relevant fields as needed
 }, { timestamps: true });
 
-const Response = mongoose.model('Response', responseSchema);
-
-module.exports = Response;
+module.exports = mongoose.model('Response', responseSchema, 'responses');

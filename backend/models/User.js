@@ -4,15 +4,41 @@ const userSchema = new mongoose.Schema({
   email: {
     type: String,
     required: true,
-    unique: true,
-    trim: true
+    unique: true
   },
-  passwordHash: {
+  emailVerified: {
+    type: Boolean,
+    required: false
+  },
+  phoneNumber: {
+    type: String,
+    required: false
+  },
+  password: { // Hashed
     type: String,
     required: true
   },
-});
+  firstName: {
+    type: String,
+    required: false
+  },
+  lastName: {
+    type: String,
+    required: false
+  },
+  photoURL: {
+    type: String,
+    required: false
+  },
+  disabled: {
+    type: Boolean,
+    required: false
+  },
+  currentQuestionIndex: {
+    type: Number,
+    required: false,
+    default: 0
+  },
+}, { timestamps: true });
 
-const User = mongoose.model('User', userSchema);
-
-module.exports = User;
+module.exports = mongoose.model('User', userSchema, 'users');

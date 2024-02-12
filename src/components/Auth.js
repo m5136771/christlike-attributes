@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../firebase';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+
+import { auth } from '../firebase';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 
 // TODO: Add Phone Sign In
 // TODO: Add Facebook Sign In
@@ -23,10 +25,14 @@ const Auth = () => {
 
   const handleRegister = async (email, password) => {
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
+      const response = await axios.post('http://localhost:5000/api/users', {
+        email: email,
+        password: password,
+      });
+      console.log('User created:', response.data);
       navigate('/dashboard');
     } catch (error) {
-      console.error(error.message);
+      console.error('Error creating user:', error);
       setError(error.message);
     }
   };

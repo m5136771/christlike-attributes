@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import QuestionCard from '../components/QuestionCard';
 import ProgressBar from '../components/ProgressBar';
-import questions from '../question-bank';
 
 const sectionColors = {
   Faith: '#f9d71c', // Sunflower Yellow
@@ -19,8 +19,22 @@ const sectionColors = {
 
 const Questionnaire = () => {
   const navigate = useNavigate();
+  const [questions, setQuestions] = useState([]);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [responses, setResponses] = useState({});
+
+  useEffect(() => {
+    const fetchQuestions = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/api/questions');
+        setQuestions(response.data);
+      } catch (error) {
+        console.error('Error fetching questions:', error);
+      }
+    };
+
+    fetchQuestions();
+  }, []);
 
   const isQuestionAvailable = currentQuestion < questions.length;
   const currentSection = isQuestionAvailable ? questions[currentQuestion].section : '';
