@@ -33,7 +33,12 @@ const userSchema = new mongoose.Schema({
   disabled: {
     type: Boolean,
     required: false
-  }
+  },
+  currentQuestionIndex: {
+    type: Number,
+    required: false,
+    default: 0
+  },
 }, { timestamps: true });
 
 module.exports = mongoose.model('User', userSchema, 'users');
