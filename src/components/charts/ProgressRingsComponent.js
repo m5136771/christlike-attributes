@@ -42,8 +42,9 @@ const ProgressRingsComponent = ({ data }) => {
 	return (
 		<div className="flex flex-wrap justify-center items-center">
 			{data.map((item, index) => {
+				const scorePercentage = item.averageScore * 100;
 				return (
-					<div key={index} className="m-4 relative">
+					<div key={index} className="m-4 relative text-center">
 						<ResponsiveContainer width={200} height={200}>
 							<PieChart>
 								<Pie
@@ -67,6 +68,10 @@ const ProgressRingsComponent = ({ data }) => {
 							icon={getIcon(item.name)}
 							className="text-3xl text-gray-500 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
 						/>
+						<div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2">
+							<p className="text-lg font-bold">{item.name}</p>
+							<p className="text-sm">{`${scorePercentage.toFixed(1)}%`}</p>
+						</div>
 						{/* <p className="text-center text-lg font-bold -mt-2">{item.name}</p> */}
 					</div>
 				);
