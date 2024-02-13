@@ -5,34 +5,28 @@ import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClipboardList } from '@fortawesome/free-solid-svg-icons';
 
-// TODO: Make Saving profile button update DB
-
 const Dashboard = () => {
 	const navigate = useNavigate();
-	const [user, setUser] = useState({
-		email: '',
-		firstName: '',
-		lastName: '',
-		phoneNumber: '',
-		profilePicture: null
-	});
-	const [newPassword, setNewPassword] = useState('');
+	const [user, setUser] = useState({});
+	const [newPassword] = useState('');
+	const [saveStatus, setSaveStatus] = useState('');
+
+	const auth = getAuth();
+	const u = auth.currentUser;
+	const uid = u.uid;
 
 	useEffect(() => {
-		const auth = getAuth();
-		const u = auth.currentUser;
-
 		if (u) {
-			axios.get('http://localhost:5000/api/users', {
-				params: { email: u.email }
-			})
+			axios.get(`http://localhost:5000/api/users/${uid}`)
 				.then(response => {
 					setUser(response.data);
+					console.log('User found:', response.data);
 				})
 				.catch(error => {
 					console.error('Error finding user:', error);
 				});
 		} else {
+			console.error('User not logged in');
 			navigate('/');
 		}
 	}, [navigate]);
@@ -41,23 +35,23 @@ const Dashboard = () => {
 		navigate('/questionnaire');
 	};
 
-	const handleInputChange = async (event) => {
+	const handleInputChange = (event) => {
 		const { name, value } = event.target;
-		setUser({ ...user, [name]: value });
-		try {
-			await axios.put('http://localhost:5000/api/users', user);
-			console.log('User profile updated');
-		} catch (error) {
-			console.error('Error updating user profile:', error);
-		}
+		setUser((prevUser) => ({
+			...prevUser,
+			[name]: value
+		}));
 	};
 
 	const handleSubmit = async () => {
 		try {
-			await axios.put('http://localhost:5000/api/users', user);
-			console.log('User profile updated');
+			const r = await axios.put(`http://localhost:5000/api/users/${u.uid}`, user);
+			console.log('User profile updated', r.data);
+			setSaveStatus('Profile updated successfully!');
+			setTimeout(() => setSaveStatus(''), 5000); // Reset the message after 5 seconds
 		} catch (error) {
-			console.error('Error updating user profile:', error);
+			console.error('Error updating user profile:', error.r.data);
+			setSaveStatus('Failed to update profile.');
 		}
 	};
 
@@ -80,12 +74,17 @@ const Dashboard = () => {
 			<div className="max-w-2xl mx-auto">
 				<h1 className="text-4xl font-bold mb-4">Dashboard</h1>
 
+				{saveStatus && (
+					<div className={`mt-2 text-center font-semibold ${saveStatus.startsWith('Failed') ? 'text-red-500' : 'text-green-500'}`}>
+						{saveStatus}
+					</div>
+				)}
+
 				<div className="flex flex-col my-4">
 					<label htmlFor="profilePicture" className="text-gray-700">Profile Picture</label>
 					<input
 						type="file"
 						name="profilePicture"
-						onChange={handleInputChange}
 						className="p-2 border border-gray-300 rounded-md"
 					/>
 				</div>
@@ -94,7 +93,7 @@ const Dashboard = () => {
 					<input
 						type="text"
 						name="email"
-						value={user.email}
+						value={user.email || ''}
 						onChange={handleInputChange}
 						className="p-2 border border-gray-300 rounded-md"
 						placeholder="Email"
@@ -102,7 +101,7 @@ const Dashboard = () => {
 					<input
 						type="text"
 						name="firstName"
-						value={user.firstName}
+						value={user.firstName || ''}
 						onChange={handleInputChange}
 						className="p-2 border border-gray-300 rounded-md"
 						placeholder="First Name"
@@ -110,7 +109,7 @@ const Dashboard = () => {
 					<input
 						type="text"
 						name="lastName"
-						value={user.lastName}
+						value={user.lastName || ''}
 						onChange={handleInputChange}
 						className="p-2 border border-gray-300 rounded-md"
 						placeholder="Last Name"
@@ -118,7 +117,7 @@ const Dashboard = () => {
 					<input
 						type="text"
 						name="phoneNumber"
-						value={user.phoneNumber}
+						value={user.phoneNumber || ''}
 						onChange={handleInputChange}
 						className="p-2 border border-gray-300 rounded-md"
 						placeholder="Phone Number"
@@ -128,7 +127,6 @@ const Dashboard = () => {
 							type="password"
 							name="newPassword"
 							value={newPassword}
-							onChange={(e) => setNewPassword(e.target.value)}
 							className="p-2 border border-gray-300 rounded-md"
 							placeholder="New Password"
 						/>

@@ -52,14 +52,25 @@ app.post('/api/users', async (req, res) => {
    }
 });
 
-app.get('/api/users', async (req, res) => {
+app.get('/api/users/:uid', async (req, res) => {
    try {
-      const email = req.query.email;
-      const user = await User
-         .findOne({ email: email })
-         .select('-password');
-      console.log(user);
-      res.json(user);
+      const userDoc = await User.findById(req.params.uid);
+      console.log(userDoc);
+      res.json(userDoc);
+   } catch (error) {
+      res.status(500).send(error.message);
+   }
+});
+
+app.put('/api/users/:uid', async (req, res) => {
+   try {
+      const userDoc = await User.findByIdAndUpdate(
+         req.params.uid,
+         req.body,
+         { new: true }
+      );
+      console.log(userDoc);
+      res.json(userDoc);
    } catch (error) {
       res.status(500).send(error.message);
    }
