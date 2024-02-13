@@ -42,20 +42,19 @@ const ProgressRingsComponent = ({ data }) => {
 	return (
 		<div className="flex flex-wrap justify-center items-center">
 			{data.map((item, index) => {
-				const score = (item.sumOfResponses / (item.totalQuestions * 5)) * 100;
 				return (
 					<div key={index} className="m-4 relative">
 						<ResponsiveContainer width={200} height={200}>
 							<PieChart>
 								<Pie
-									data={[{ name: item.name, value: item.sumOfResponses, totalQuestions: item.totalQuestions }]}
+									data={[{ name: item.name, value: item.averageScore }]}
 									dataKey="value"
 									cx="50%"
 									cy="50%"
 									innerRadius={50}
 									outerRadius={70}
 									startAngle={90}
-									endAngle={-270 * (score / 100) + 90}
+									endAngle={-270 * item.averageScore + 90}
 									fill={item.color}
 									blendStroke
 								>

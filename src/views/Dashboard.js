@@ -122,7 +122,7 @@ const Dashboard = () => {
 						className="p-2 border border-gray-300 rounded-md"
 						placeholder="Phone Number"
 					/>
-					<div className="flex flex-col my-4 space-y-3">
+					{/* <div className="flex flex-col my-4 space-y-3">
 						<input
 							type="password"
 							name="newPassword"
@@ -131,7 +131,7 @@ const Dashboard = () => {
 							placeholder="New Password"
 						/>
 						<button onClick={handleChangePassword} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Change Password</button>
-					</div>
+					</div> */}
 					<button onClick={handleSubmit} className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Save Profile</button>
 				</div>
 			</div>
@@ -143,6 +143,16 @@ const Dashboard = () => {
 					<span className="flex items-center justify-center space-x-2">
 						<FontAwesomeIcon icon={faClipboardList} className="w-6 h-6" />
 						<span>Go to Questionnaire</span>
+					</span>
+				</button>
+				{/* button to go to results page */}
+				<button
+					onClick={() => navigate('/results')}
+					className="bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-700 hover:to-blue-500 text-white font-bold py-3 px-6 rounded-full shadow-lg hover:shadow-xl transition duration-300 ease-in-out transform hover:scale-105"
+				>
+					<span className="flex items-center justify-center space-x-2">
+						<FontAwesomeIcon icon={faClipboardList} className="w-6 h-6" />
+						<span>Go to Results</span>
 					</span>
 				</button>
 			</div>

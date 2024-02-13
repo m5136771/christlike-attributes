@@ -29,9 +29,9 @@ app.post('/api/users', async (req, res) => {
    try {
       // Create user in MongoDB
       const newUser = new User(req.body);
-      console.log(newUser);
+      console.log('Creating new user:', newUser);
       const savedUser = await newUser.save();
-      console.log(savedUser);
+      console.log('User saved:', savedUser);
 
       // Create user in Firebase with the same _id
       try {
@@ -55,7 +55,7 @@ app.post('/api/users', async (req, res) => {
 app.get('/api/users/:uid', async (req, res) => {
    try {
       const userDoc = await User.findById(req.params.uid);
-      console.log(userDoc);
+      console.log('Found user:', userDoc);
       res.json(userDoc);
    } catch (error) {
       res.status(500).send(error.message);
@@ -69,7 +69,7 @@ app.put('/api/users/:uid', async (req, res) => {
          req.body,
          { new: true }
       );
-      console.log(userDoc);
+      console.log('Updated user:', userDoc);
       res.json(userDoc);
    } catch (error) {
       res.status(500).send(error.message);
@@ -80,7 +80,7 @@ app.put('/api/users/:uid', async (req, res) => {
 app.get('/api/questions', async (req, res) => {
    try {
       const q = await Question.find();
-      console.log(q);
+      console.log('Found questions at /api/questions:');
       res.json(q);
    } catch (error) {
       res.status(500).send(error.message);
@@ -92,12 +92,66 @@ app.get('/api/questions', async (req, res) => {
 app.post('/api/responses', async (req, res) => {
    try {
       const newResponse = new Response(req.body);
-      console.log(newResponse);
+      console.log('Creating new response:', newResponse);
 
       const savedResponse = await newResponse.save();
       res.status(201).json(savedResponse);
    } catch (error) {
       console.error('Error saving response:', error);
+      res.status(500).send(error.message);
+   }
+});
+
+app.get('/api/responses/:questionId/:userId', async (req, res) => {
+   console.log('Request parameters:', req.params);
+   try {
+      const response = await Response.findOne({
+         question: new ObjectId(req.params.questionId),
+         user: new ObjectId(req.params.userId)
+      });
+      if (response) {
+         console.log('Found existing response:', response);
+         res.json(response);
+      } else {
+         console.log('Response not found');
+         return res.status(404).send('Response not found');
+      }
+   } catch (error) {
+      console.error('Error finding response:', error);
+      res.status(500).json({ message: error.message });
+   }
+});
+
+app.get('/api/user-responses/:userId', async (req, res) => {
+   console.log('Request parameters:', req.params);
+   try {
+      const responses = await Response.find({ user: new ObjectId(req.params.userId) })
+         .populate('question', 'section')
+         .exec();
+
+      const data = responses.map(r => ({
+         section: r.question.section,
+         response: r.response
+      }));
+
+      res.json(data);
+   } catch (error) {
+      console.error('Error fetching user responses:', error);
+      res.status(500).send('Error fetching user responses: ' + error.message);
+   }
+});
+
+
+app.put('/api/responses/:responseId', async (req, res) => {
+   try {
+      const updatedResponse = await Response.findByIdAndUpdate(
+         req.params.responseId,
+         req.body,
+         { new: true }
+      );
+      console.log('Updated response:', updatedResponse);
+      res.json(updatedResponse);
+   } catch (error) {
       res.status(500).send(error.message);
    }
 });

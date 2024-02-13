@@ -1,41 +1,85 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { getAuth } from 'firebase/auth';
+
+// Component Imports
 /* import RadarChartComponent from '../components/charts/RadarChartComponent'; */
 import ProgressRingsComponent from '../components/charts/ProgressRingsComponent';
 
-const data = [
-  { name: 'Faith', totalQuestions: 9, sumOfResponses: 37, color: '#faf089' },
-  { name: 'Hope', totalQuestions: 4, sumOfResponses: 13, color: '#48bb78' },
-  { name: 'Charity', totalQuestions: 10, sumOfResponses: 35, color: '#e53e3e' },
-  { name: 'Virtue', totalQuestions: 6, sumOfResponses: 24, color: '#f6e05e' },
-  { name: 'Integrity', totalQuestions: 8, sumOfResponses: 32, color: '#a0aec0' },
-  { name: 'Knowledge', totalQuestions: 5, sumOfResponses: 20, color: '#f6ad55' },
-  { name: 'Patience', totalQuestions: 6, sumOfResponses: 22, color: '#9f7aea' },
-  { name: 'Humility', totalQuestions: 6, sumOfResponses: 25, color: '#63b3ed' },
-  { name: 'Diligence', totalQuestions: 7, sumOfResponses: 30, color: '#dd6b20' },
-  { name: 'Obedience', totalQuestions: 7, sumOfResponses: 28, color: '#f687b3' },
-];
 
 const ResultsView = () => {
+  const auth = getAuth();
+  const user = auth.currentUser;
+  console.log('user:', user);
+  const uid = user.uid;
+  console.log('uid:', uid);
+
   const [sortType, setSortType] = useState('none');
+  const [data, setData] = useState([]);
+
+  const sectionData = [
+    { name: 'Faith', color: '#faf089' },
+    { name: 'Hope', color: '#48bb78' },
+    { name: 'Charity', color: '#e53e3e' },
+    { name: 'Virtue', color: '#f6e05e' },
+    { name: 'Integrity', color: '#a0aec0' },
+    { name: 'Knowledge', color: '#f6ad55' },
+    { name: 'Patience', color: '#9f7aea' },
+    { name: 'Humility', color: '#63b3ed' },
+    { name: 'Diligence', color: '#dd6b20' },
+    { name: 'Obedience', color: '#f687b3' },
+  ];
+
+  useEffect(() => {
+    if (user) {
+      const fetchData = async () => {
+        try {
+          const response = await axios.get(`http://localhost:5000/api/user-responses/${uid}`);
+          const rawData = response.data;
+
+          const aggregatedData = sectionData.map((section) => {
+            const responsesForSection = rawData.filter(r => r.section === section.name);
+            const sumOfResponses = responsesForSection.reduce((sum, r) => sum + r.response, 0);
+            const totalQuestions = responsesForSection.length;
+            console.log('sumOfResponses:', sumOfResponses);
+
+            console.log('Section name:', section.name);
+            console.log('Section color:', section.color);
+            console.log('Total questions:', totalQuestions);
+            console.log('Average score:', totalQuestions > 0 ? sumOfResponses / totalQuestions : 0);
+            return {
+              name: section.name,
+              color: section.color,
+              averageScore: totalQuestions > 0 ? sumOfResponses / (totalQuestions * 5) : 0
+            };
+          });
+
+          setData(aggregatedData);
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
+      };
+
+      fetchData();
+    } else {
+      console.error('User not authenticated');
+      // Redirect to login
+    }
+  }, [user, uid]);
+
 
   const calculateScorePercentage = (item) => {
     return item.sumOfResponses / (item.totalQuestions * 5);
   };
 
-  const sortedData = [...data].sort((a, b) => {
-    if (sortType === 'name-asc') {
-      return a.name.localeCompare(b.name);
+  const sortedData = data.sort((a, b) => {
+    switch (sortType) {
+      case 'name-asc': return a.name.localeCompare(b.name);
+      case 'name-desc': return b.name.localeCompare(a.name);
+      case 'score-asc': return a.averageScore - b.averageScore;
+      case 'score-desc': return b.averageScore - a.averageScore;
+      default: return 0;
     }
-    if (sortType === 'name-desc') {
-      return b.name.localeCompare(a.name);
-    }
-    if (sortType === 'score-asc') {
-      return calculateScorePercentage(a) - calculateScorePercentage(b);
-    }
-    if (sortType === 'score-desc') {
-      return calculateScorePercentage(b) - calculateScorePercentage(a);
-    }
-    return 0;
   });
 
   return (
@@ -50,7 +94,6 @@ const ResultsView = () => {
           <option value='score-desc'>Score (High to Low)</option>
         </select>
       </div>
-      {/* <RadarChartComponent /> */}
       <ProgressRingsComponent data={sortedData} />
     </div>
   );
