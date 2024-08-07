@@ -1,0 +1,460 @@
+{
+  "attributes": [
+    {
+      "name": "Faith",
+      "color": "#4A90E2",
+      "symbol": "cross",
+      "questions": {
+        "likert": [
+          {
+            "question": "On a scale of 1 to 5, how often do you pray with genuine intent?",
+            "options": [1, 2, 3, 4, 5]
+          },
+          {
+            "question": "On a scale of 1 to 5, how strong is your belief in God's promises?",
+            "options": [1, 2, 3, 4, 5]
+          },
+          {
+            "question": "On a scale of 1 to 5, how often do you feel God's presence in your life?",
+            "options": [1, 2, 3, 4, 5]
+          }
+        ],
+        "scenario": [
+          {
+            "question": "If faced with a difficult decision, do you trust that God will guide you?",
+            "options": ["Always", "Often", "Sometimes", "Rarely", "Never"]
+          },
+          {
+            "question": "In a crisis, how likely are you to turn to prayer before taking action?",
+            "options": [
+              "Very likely",
+              "Likely",
+              "Neutral",
+              "Unlikely",
+              "Very unlikely"
+            ]
+          }
+        ],
+        "shortAnswer": [
+          {
+            "question": "Describe a recent situation where you had to exercise faith. How did you handle it?"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Hope",
+      "color": "#7ED321",
+      "symbol": "anchor",
+      "questions": {
+        "likert": [
+          {
+            "question": "On a scale of 1 to 5, how hopeful are you about the future?",
+            "options": [1, 2, 3, 4, 5]
+          },
+          {
+            "question": "On a scale of 1 to 5, how often do you find yourself encouraging others to have hope?",
+            "options": [1, 2, 3, 4, 5]
+          },
+          {
+            "question": "On a scale of 1 to 5, how often do you focus on positive outcomes in difficult situations?",
+            "options": [1, 2, 3, 4, 5]
+          }
+        ],
+        "scenario": [
+          {
+            "question": "In a challenging situation, how do you maintain hope?",
+            "options": [
+              "I remind myself of past successes.",
+              "I seek support from others.",
+              "I rely on prayer and scripture.",
+              "I struggle to maintain hope.",
+              "I feel hopeless."
+            ]
+          },
+          {
+            "question": "When faced with uncertainty, how often do you feel optimistic?",
+            "options": ["Always", "Often", "Sometimes", "Rarely", "Never"]
+          }
+        ],
+        "shortAnswer": [
+          {
+            "question": "Share an experience where hope helped you persevere through a difficult time."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Charity",
+      "color": "#D0021B",
+      "symbol": "heart",
+      "questions": {
+        "likert": [
+          {
+            "question": "On a scale of 1 to 5, how often do you perform acts of kindness without expecting anything in return?",
+            "options": [1, 2, 3, 4, 5]
+          },
+          {
+            "question": "On a scale of 1 to 5, how much love do you feel for your fellow beings?",
+            "options": [1, 2, 3, 4, 5]
+          },
+          {
+            "question": "On a scale of 1 to 5, how often do you volunteer your time to help others?",
+            "options": [1, 2, 3, 4, 5]
+          }
+        ],
+        "scenario": [
+          {
+            "question": "When you see someone in need, how do you respond?",
+            "options": [
+              "I always help immediately.",
+              "I help when I can.",
+              "I feel empathy but often don't act.",
+              "I rarely help.",
+              "I don't help."
+            ]
+          },
+          {
+            "question": "How often do you engage in community service or charitable activities?",
+            "options": ["Weekly", "Monthly", "Occasionally", "Rarely", "Never"]
+          }
+        ],
+        "shortAnswer": [
+          {
+            "question": "Describe a time when you showed charity to someone in need."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Virtue",
+      "color": "#FFFFFF",
+      "symbol": "lily",
+      "questions": {
+        "likert": [
+          {
+            "question": "On a scale of 1 to 5, how do you rate your moral integrity?",
+            "options": [1, 2, 3, 4, 5]
+          },
+          {
+            "question": "On a scale of 1 to 5, how often do you make decisions based on your moral values?",
+            "options": [1, 2, 3, 4, 5]
+          }
+        ],
+        "scenario": [
+          {
+            "question": "Faced with a moral dilemma, what would you do?",
+            "options": [
+              "Always choose the moral high ground.",
+              "Usually choose the moral high ground.",
+              "Sometimes choose the moral high ground.",
+              "Rarely choose the moral high ground.",
+              "Never choose the moral high ground."
+            ]
+          }
+        ],
+        "shortAnswer": [
+          {
+            "question": "Explain a situation where you maintained your virtue despite challenges."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Knowledge",
+      "color": "#F8E71C",
+      "symbol": "book",
+      "questions": {
+        "likert": [
+          {
+            "question": "On a scale of 1 to 5, how often do you seek to learn more about your faith?",
+            "options": [1, 2, 3, 4, 5]
+          },
+          {
+            "question": "On a scale of 1 to 5, how often do you study scriptures or religious texts?",
+            "options": [1, 2, 3, 4, 5]
+          }
+        ],
+        "scenario": [
+          {
+            "question": "How do you approach learning about new aspects of your faith?",
+            "options": [
+              "I actively seek out information.",
+              "I learn when prompted by others.",
+              "I learn occasionally.",
+              "I rarely seek out new information.",
+              "I don't seek out new information."
+            ]
+          }
+        ],
+        "shortAnswer": [
+          {
+            "question": "Describe a time when gaining knowledge strengthened your faith."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Patience",
+      "color": "#9013FE",
+      "symbol": "clock",
+      "questions": {
+        "likert": [
+          {
+            "question": "On a scale of 1 to 5, how patient are you with others?",
+            "options": [1, 2, 3, 4, 5]
+          },
+          {
+            "question": "On a scale of 1 to 5, how often do you remain calm under pressure?",
+            "options": [1, 2, 3, 4, 5]
+          }
+        ],
+        "scenario": [
+          {
+            "question": "In a stressful situation, how do you maintain patience?",
+            "options": [
+              "I always remain calm and collected.",
+              "I usually remain calm.",
+              "I sometimes remain calm.",
+              "I rarely remain calm.",
+              "I never remain calm."
+            ]
+          }
+        ],
+        "shortAnswer": [
+          {
+            "question": "Share an experience where you had to practice patience."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Humility",
+      "color": "#A47C48",
+      "symbol": "basinAndTowel",
+      "questions": {
+        "likert": [
+          {
+            "question": "On a scale of 1 to 5, how often do you put others before yourself?",
+            "options": [1, 2, 3, 4, 5]
+          },
+          {
+            "question": "On a scale of 1 to 5, how often do you accept constructive criticism?",
+            "options": [1, 2, 3, 4, 5]
+          }
+        ],
+        "scenario": [
+          {
+            "question": "How do you handle praise and recognition?",
+            "options": [
+              "I always deflect praise to others.",
+              "I usually acknowledge others' contributions.",
+              "I sometimes acknowledge others.",
+              "I rarely acknowledge others.",
+              "I take all the credit."
+            ]
+          }
+        ],
+        "shortAnswer": [
+          {
+            "question": "Describe a time when you practiced humility in a challenging situation."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Diligence",
+      "color": "#F5A623",
+      "symbol": "hammer",
+      "questions": {
+        "likert": [
+          {
+            "question": "On a scale of 1 to 5, how diligent are you in your daily tasks?",
+            "options": [1, 2, 3, 4, 5]
+          },
+          {
+            "question": "On a scale of 1 to 5, how often do you complete tasks you start?",
+            "options": [1, 2, 3, 4, 5]
+          }
+        ],
+        "scenario": [
+          {
+            "question": "How do you approach your responsibilities?",
+            "options": [
+              "I always approach them with dedication.",
+              "I usually approach them with dedication.",
+              "I sometimes approach them with dedication.",
+              "I rarely approach them with dedication.",
+              "I don't approach them with dedication."
+            ]
+          }
+        ],
+        "shortAnswer": [
+          {
+            "question": "Explain a situation where diligence was key to your success."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Obedience",
+      "color": "#BDC3C7",
+      "symbol": "yoke",
+      "questions": {
+        "likert": [
+          {
+            "question": "On a scale of 1 to 5, how obedient are you to God's commandments?",
+            "options": [1, 2, 3, 4, 5]
+          },
+          {
+            "question": "On a scale of 1 to 5, how often do you follow spiritual promptings?",
+            "options": [1, 2, 3, 4, 5]
+          }
+        ],
+        "scenario": [
+          {
+            "question": "How do you respond to spiritual promptings?",
+            "options": [
+              "I always follow them immediately.",
+              "I usually follow them.",
+              "I sometimes follow them.",
+              "I rarely follow them.",
+              "I never follow them."
+            ]
+          }
+        ],
+        "shortAnswer": [
+          {
+            "question": "Share a time when obedience guided your actions."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Kindness",
+      "color": "#FF4081",
+      "symbol": "dove",
+      "questions": {
+        "likert": [
+          {
+            "question": "On a scale of 1 to 5, how often do you act kindly towards others?",
+            "options": [1, 2, 3, 4, 5]
+          },
+          {
+            "question": "On a scale of 1 to 5, how often do you try to resolve conflicts peacefully?",
+            "options": [1, 2, 3, 4, 5]
+          }
+        ],
+        "scenario": [
+          {
+            "question": "How do you react when someone is unkind to you?",
+            "options": [
+              "I always respond with kindness.",
+              "I usually respond with kindness.",
+              "I sometimes respond with kindness.",
+              "I rarely respond with kindness.",
+              "I never respond with kindness."
+            ]
+          },
+          {
+            "question": "When you see a conflict, how likely are you to intervene to help resolve it?",
+            "options": [
+              "Very likely",
+              "Likely",
+              "Neutral",
+              "Unlikely",
+              "Very unlikely"
+            ]
+          }
+        ],
+        "shortAnswer": [
+          {
+            "question": "Describe an instance where you showed kindness despite challenges."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Forgiveness",
+      "color": "#00A896",
+      "symbol": "oliveBranch",
+      "questions": {
+        "likert": [
+          {
+            "question": "On a scale of 1 to 5, how willing are you to forgive others?",
+            "options": [1, 2, 3, 4, 5]
+          },
+          {
+            "question": "On a scale of 1 to 5, how often do you let go of grudges?",
+            "options": [1, 2, 3, 4, 5]
+          }
+        ],
+        "scenario": [
+          {
+            "question": "Someone wrongs you. How do you approach forgiveness?",
+            "options": [
+              "I forgive immediately.",
+              "I usually forgive quickly.",
+              "I sometimes forgive.",
+              "I rarely forgive.",
+              "I never forgive."
+            ]
+          },
+          {
+            "question": "How often do you feel at peace after forgiving someone?",
+            "options": ["Always", "Often", "Sometimes", "Rarely", "Never"]
+          }
+        ],
+        "shortAnswer": [
+          {
+            "question": "Explain a situation where you had to forgive someone."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Gratitude",
+      "color": "#F5BF00",
+      "symbol": "cornucopia",
+      "questions": {
+        "likert": [
+          {
+            "question": "On a scale of 1 to 5, how often do you express gratitude?",
+            "options": [1, 2, 3, 4, 5]
+          },
+          {
+            "question": "On a scale of 1 to 5, how often do you reflect on your blessings?",
+            "options": [1, 2, 3, 4, 5]
+          }
+        ],
+        "scenario": [
+          {
+            "question": "How do you show gratitude in your daily life?",
+            "options": [
+              "I always express my thanks.",
+              "I usually express my thanks.",
+              "I sometimes express my thanks.",
+              "I rarely express my thanks.",
+              "I never express my thanks."
+            ]
+          },
+          {
+            "question": "When someone helps you, how do you respond?",
+            "options": [
+              "I always thank them sincerely.",
+              "I usually thank them.",
+              "I sometimes thank them.",
+              "I rarely thank them.",
+              "I never thank them."
+            ]
+          }
+        ],
+        "shortAnswer": [
+          {
+            "question": "Share an experience where gratitude positively impacted your life."
+          }
+        ]
+      }
+    }
+  ]
+}
