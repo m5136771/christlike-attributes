@@ -1,5 +1,5 @@
 import React from "react";
-import questions from "../question-bank";
+import questions from "../temp/question-bank";
 
 const ProgressBar = ({ current, sectionColors }) => {
 	const totalQuestions = questions.length;
